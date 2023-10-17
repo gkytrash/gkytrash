@@ -1,0 +1,22 @@
+#md5-clip-compare
+alias md5c=md5_compare2clip
+
+md5_compare2clip() {
+clipmd5="$(xsel --clipboard | tr -d '\n')"
+checkclipmd5="$(echo $clipmd5 | grep -e '[0-9a-f]\{32\}')"
+if [[ "$checkclipmd5" < "1" ]];
+then
+echo "Missing MD5 in Clipboard"
+else
+f="$1"
+echo "clipMD5: $checkclipmd5"
+fileMD5="$(md5sum $f | awk '{print$1}')"
+echo "fileMD5: $fileMD5"
+if [[ "$fileMD5" == "$checkclipmd5" ]];
+then
+echo "MD5 Matches"
+else
+echo "MD5 Doesn't Match"
+fi
+fi
+}
