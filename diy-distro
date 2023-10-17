@@ -1,0 +1,18 @@
+Immutable (ostree)
+UEFI/SecureBoot/Unified Kernel Image
+hardened kernel
+LUKS2 w/kali self-destruct
+OpenRC
+SELinux
+zero-trust
+boot to kvm/xen dom0 vm web gui
+btrfs w/snap
+distrobox
+nix packages/flakes in distrobox automation
+containers/k3s
+flatpak
+bottles
+make disposable container chains/circuits tor/i2p/vpn
+covert management dns/icmp tunneling
+Summary:
+A cross between qubes proxmox silverblue and ??? with a minimal build 
