@@ -1,0 +1,8 @@
+alias cdd="cd ~"
+alias nin="sudo nala install"
+alias nun="sudo nala remove"
+alias nup="sudo nala update"
+alias npu="sudo nala purge"
+alias ll="ls -la"
+alias pvm="pipe-viewer --args mpv $1"
+alias 
