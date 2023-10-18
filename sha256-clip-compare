@@ -1,0 +1,22 @@
+#md5-clip-compare
+alias sha256c=sha256_compare2clip
+
+sha256_compare2clip() {
+clip256="$(xsel --clipboard | tr -d '\n')"
+checkclipsha256="$(echo $clipsha256 | grep -e '[0-9a-f]\{43\}')"
+if [[ "$checkclipsha256" < "1" ]];
+then
+echo "Missing SHA256 in Clipboard"
+else
+f="$1"
+echo "clipSHA256: $checkclipsha256"
+filesha256="$(sha256sum $f | awk '{print$1}')"
+echo "filesha256: $filesha256"
+if [[ "$filesha256" == "$checkclipsha256" ]];
+then
+echo "sha256 Matches"
+else
+echo "sha256 Doesn't Match"
+fi
+fi
+}
