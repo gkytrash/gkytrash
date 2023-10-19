@@ -1,0 +1,8 @@
+#compare md5 of file to one in clipboard
+
+#compare sha256 of file to one in clipboard
+
+#shred file/folder
+
+#launch terminal in distrobox
+
