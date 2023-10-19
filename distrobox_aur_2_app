@@ -1,0 +1,31 @@
+#distrobox debian app automation
+
+alias aur2a=aur2app
+
+aur2app() {
+
+aurapp="$(xsel --clipboard | tr -d '\n')"
+
+checkclip="$(echo $aurapp | grep -e 'yay' | wc -l)"
+
+if [[ "$checkclip" < "1" ]];
+
+then
+
+echo "Missing yay command in clipboard"
+
+else
+
+distrobox enter --root arch && sudo yay -Syu
+
+echo bin name
+
+read appname
+
+$aurapp
+
+distrobox-export --bin /usr/bin/$appname --export-path /var/home/usr001/Documents
+
+distrobox-host-exec distrobox enter --root deb && distrobox-host-exec distrobox-rm --root arch --force && distrobox-host-exec distrobox-create --clone archlinux --name arch
+fi/var
+}
