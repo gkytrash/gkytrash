@@ -1,0 +1,31 @@
+#distrobox debian app automation
+
+alias a2a=apt2app
+
+apt2app() {
+
+aptapp="$(xsel --clipboard | tr -d '\n')"
+
+checkclip="$(echo $aptapp | grep -e 'apt' | wc -l)"
+
+if [[ "$checkclip" < "1" ]];
+
+then
+
+echo "Missing apt command in clipboard"
+
+else
+
+distrobox enter --root deb && sudo apt update && sudo apt dist-upgrade -y
+
+echo bin name
+
+read appname
+
+$aptapp -y
+
+distrobox-export --bin /usr/bin/$appname --export-path /var/home/usr001/Documents
+
+distrobox-host-exec distrobox enter --root arch && distrobox-host-exec distrobox-rm --root deb --force && distrobox-host-exec distrobox-create --clone debian --name deb
+fi/var
+}
