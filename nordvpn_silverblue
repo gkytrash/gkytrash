@@ -1,0 +1,19 @@
+# nordvpn to-be-adapted for silverblue
+# Install NordVPN for Fedora and QubesOS
+# (with the dnf package manager)
+install_dnf() {
+    if check_cmd dnf; then
+        get_install_opts_for_dnf
+        install_opts="$RETVAL"
+        
+        repo="${REPO_URL_RPM}"
+        if [ ! -f "${REPO_URL_RPM}" ]; then
+            repo="${repo}/${ARCH}"
+        fi
+
+        $SUDO rpm -v --import "${PUB_KEY}"
+        $SUDO dnf config-manager --add-repo "${repo}"
+        $SUDO dnf $install_opts install nordvpn
+        exit
+    fi
+}
