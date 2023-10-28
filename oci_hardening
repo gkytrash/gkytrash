@@ -1,0 +1,15 @@
+FROM golang:alpine as build
+WORKDIR /app
+COPY . .
+RUN CGO_ENABLED=0 go mod -o /my_app cmd/my_app
+
+FROM gcr.io/distroless/static
+COPY --from=build /my_app /
+USER nobody
+ENTRYPOINT ["/my_app"]
+
+# for go only pkg in alpine for nordvpn
+# https://privsec.dev/posts/linux/docker-and-oci-hardening/
+# use harbor for selfhost oci
+# https://github.com/aquasecurity/trivy sec scan oci
+# https://github.com/containers/oci-seccomp-bpf-hook profile to remove syscalls
